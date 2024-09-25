@@ -1,7 +1,18 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    `maven-publish`
+    id("maven-publish")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("ReleaseAar") {
+            groupId = "com.example.greattalent"
+            artifactId = "greattalent"
+            version = "0.0.3"
+            afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
+        }
+    }
 }
 
 android {
